@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 // route - home route
 app.get("/", (req, res) => {
   res.status(200).send(`
-  <h1 style="text-align: center; color: black; margin-top: 20vh">Welcome to my api home page</h1>
+  <h1 style="text-align: center; color: #CCD6F6; margin-top: 20vh; background: #0A192F; padding: 150px;">APIs for my Brand</h1>
   `);
 });
 
