@@ -2,7 +2,6 @@ import Blog from "../model/blog.js";
 import errorFunc from "../utils/errorFunc.js";
 
 class blogController {
-  // CRUD (Create, Read, Update, Delete) Operation 
   // get all blogs
   static async getBlogs(req, res) {
     try {

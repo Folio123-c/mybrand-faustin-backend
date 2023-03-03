@@ -33,7 +33,7 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan('combined'))
 };
 
-// define some variables
+// define some my env variables
 const port = process.env.PORT;
 const host = process.env.HOST;
 
