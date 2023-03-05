@@ -7,7 +7,7 @@ const secret = "faustin";
 const loginController = async (req, res) => {
     // email and password from the body
     const { email, password } = req.body;
-
+    console.log(email, password);
     try {
         const user = await User.findOne({ email });
 
@@ -27,7 +27,7 @@ const loginController = async (req, res) => {
 
                 res.cookie("token", token, {
                     httpOnly: true,
-                    secure: true, // I must remember to set this to true in production
+                    secure: false, // I must remember to set this to true in production
                 });
 
                 return res.status(200).json({ message: "Logged in successfully" });
