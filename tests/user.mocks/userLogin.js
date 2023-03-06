@@ -6,5 +6,3 @@ export const invalidUsercredentilas={
     email:"jayd@gmail.com",
     password:"12345"
 }
-
-export const userToken = {}

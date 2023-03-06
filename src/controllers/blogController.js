@@ -39,6 +39,7 @@ class blogController {
   }
   // create blog
   static async createBlog(req, res) {
+    console.log(req)
     try {
       const { title, image, content } = req.body;
       const newBlog = await Blog.create({ title, image ,content});
