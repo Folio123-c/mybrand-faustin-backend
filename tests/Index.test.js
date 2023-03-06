@@ -3,6 +3,7 @@ import app from "../src/app.js";
 import {createBlog} from "./blog.mocks/createBlog.js";
 import {signUpdata} from "./user.mocks/userSignup.js";
 import {invalidUsercredentilas, validUserCredentials} from "./user.mocks/userLogin.js";
+import {createMessage} from "./message.mocks/sendMessage.js";
 
 let userToken = '';
 let blogId = '';
@@ -61,6 +62,19 @@ describe('My brand Api Test', () =>{
     test('Delete one blog', async() => {
         const response = await request(app)
             .delete(`/api/v1/blogs/${blogId}`)
+            .set('Cookie', `token=${userToken}`)
+        expect(response.statusCode).toBe(200);
+    })
+
+    test('Send message', async() => {
+        const response = await request(app)
+            .post('/api/v1/message')
+            .send(createMessage);
+        expect(response.statusCode).toBe(201);
+    })
+    test('get messagesfor authorized user', async() => {
+        const response = await request(app)
+            .get('/api/v1/message')
             .set('Cookie', `token=${userToken}`)
         expect(response.statusCode).toBe(200);
     })
