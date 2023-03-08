@@ -8,7 +8,8 @@
     "start": "node src/server.js",
     "dev": "nodemon babel-node src/server.js",
     "test": "jest tests/",
-    "pretest": "node cleanup.js"
+    "pretest": "node cleanup.js",
+    "build": "babel src -d dist"
   },
   "jest": {
     "testTimeout": 500000

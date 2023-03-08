@@ -72,7 +72,7 @@ describe('My brand Api Test', () =>{
             .send(createMessage);
         expect(response.statusCode).toBe(201);
     })
-    test('get messagesfor authorized user', async() => {
+    test('get messages for authorized user', async() => {
         const response = await request(app)
             .get('/api/v1/message')
             .set('Cookie', `token=${userToken}`)
