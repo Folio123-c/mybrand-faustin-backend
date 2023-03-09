@@ -195,40 +195,25 @@ paths:
           description: Not authorised to modify blogs
 
     delete:
-      summary: Update an existing blog
-      tags:
-        - Blogs
-      produces:
-        - application/json
-      consumes:
-        - application/json
-      parameters:
-        - in: path
-          name: blogId
-          type: string
-          required: true
-          description: ID of the blog to update
-        - in: body
-          name: blog
-          schema:
-            type: object
-            properties:
-              title:
-                type: string
-                description: Blog title
-              image:
-                type: string
-                description: Blog image
-              content:
-                type: string
-                description: Blog content
-      responses:
-        200:
-          schema:
-            type: object
-        401:
-          description: Not authorised to modify blogs
-  #Create blog
+        summary: Delete a blog
+        tags:
+          - Blogs
+        produces:
+          - application/json
+        parameters:
+          - in: path
+            name: blogId
+            type: string
+            required: true
+            description: ID of the blog to delete
+        responses:
+          200:
+            description: Blog deleted successfully
+          401:
+            description: You are not authorized to delete any Blog
+          404:
+            description: Blog not found
+  #Create message
   /api/v1/message:
     post:
       summary: Send a new message
@@ -298,39 +283,24 @@ paths:
         401:
           description: Not authorised to retrieve All messages
 
-  #Update and delete blog
-  /api/v1/blogs/{messageId}:
+  #Update and delete
+  /api/v1/message/{id}:
     delete:
-      summary: Update an existing blog
+      summary: Delete a message
       tags:
         - Messages
       produces:
         - application/json
-      consumes:
-        - application/json
       parameters:
         - in: path
-          name: messageId
+          name: id
           type: string
           required: true
-          description: ID of the Message to be deleted
-        - in: body
-          name: Message
-          schema:
-            type: object
-            properties:
-              title:
-                type: string
-                description: Sender username
-              image:
-                type: string
-                description: User email
-              content:
-                type: string
-                description: User message content
+          description: ID of the message to delete
       responses:
         200:
-          schema:
-            type: object
+          description: Message deleted successfully
         401:
-          description: Not authorised to delete any message
+          description: You are not authorized to delete any message
+        404:
+          description: Message not found
