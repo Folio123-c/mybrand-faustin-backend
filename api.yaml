@@ -1,0 +1,157 @@
+swagger: "2.0"
+info:
+  title: My Brand APIs swagger Docs
+  version: 1.0
+
+servers:
+  - url: 'https://mybrand-faustin.cyclic.app/'
+    description: Remote server
+  - url: 'https://mybrand-faustin-backend-production.up.railway.app/'
+    description: Remote server2
+
+  - url: 'http://localhost:5000'
+    description: Local server
+
+schemes: [https, http]
+
+paths:
+  #User sign up
+  /api/v1/signup:
+    post:
+      summary: User sign up
+      tags:
+        - Users
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: user
+          schema:
+            type: object
+            properties:
+              firstname:
+                type: string
+                required: true
+                description: User first name
+              lastname:
+                type: string
+                required: true
+                description: User last name
+              email:
+                type: string
+                required: true
+                description: User email
+              password:
+                type: string
+                required: true
+                description: User password
+      responses:
+        201:
+          schema:
+            type: object
+        500:
+          description: Something went wrong, try again
+
+  #User login
+  /api/v1/login:
+    post:
+      summary: User login
+      tags:
+        - Users
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: user
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+                required: true
+                description: User email
+              password:
+                type: string
+                required: true
+                description: User password
+      responses:
+        200:
+          schema:
+            type: object
+        400:
+          description: Invalid user credentials
+
+  #Create blog
+  /api/v1/blogs:
+    post:
+      summary: Create a new blog
+      tags:
+        - Blogs
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: blog
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                required: true
+                description: Blog title
+              image:
+                type: string
+                description: Blog image
+              content:
+                type: string
+                required: true
+                description: Blog content
+      responses:
+        201:
+          schema:
+            type: object
+        401:
+          description: Unauthorized access
+
+  #Update blog
+  /api/v1/blogs/{blogId}:
+    put:
+      summary: Update an existing blog
+      tags:
+        - Blogs
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: blogId
+          type: string
+          required: true
+          description: ID of the blog to update
+        - in: body
+          name: blog
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: Blog title
+              image:
+                type: string
+                description: Blog image
+              content:
+                type: string
+                description: Blog content
+      responses:
+        200:
+          schema:
+            type: object
+        401:
+          description:
