@@ -119,7 +119,45 @@ paths:
         401:
           description: Unauthorized access
 
-  #Update blog
+    get:
+      summary: Retrieve all blogs
+      tags:
+        - Blogs
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              blogs:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: Blog ID
+                    title:
+                      type: string
+                      description: Blog title
+                    image:
+                      type: string
+                      description: Blog image
+                    content:
+                      type: string
+                      description: Blog content
+                    created_at:
+                      type: string
+                      description: Blog creation timestamp
+                    updated_at:
+                      type: string
+                      description: Blog update timestamp
+        401:
+          description: Not authorised to retrieve blogs
+
+  #Update and delete blog
   /api/v1/blogs/{blogId}:
     put:
       summary: Update an existing blog
@@ -154,4 +192,145 @@ paths:
           schema:
             type: object
         401:
-          description:
+          description: Not authorised to modify blogs
+
+    delete:
+      summary: Update an existing blog
+      tags:
+        - Blogs
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: blogId
+          type: string
+          required: true
+          description: ID of the blog to update
+        - in: body
+          name: blog
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: Blog title
+              image:
+                type: string
+                description: Blog image
+              content:
+                type: string
+                description: Blog content
+      responses:
+        200:
+          schema:
+            type: object
+        401:
+          description: Not authorised to modify blogs
+  #Create blog
+  /api/v1/message:
+    post:
+      summary: Send a new message
+      tags:
+        - Messages
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: blog
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                required: true
+                description: Blog title
+              image:
+                type: string
+                description: Blog image
+              content:
+                type: string
+                required: true
+                description: Blog content
+      responses:
+        201:
+          schema:
+            type: object
+        400:
+          description: Complete all input field
+
+    get:
+      summary: Retrieve all messages
+      tags:
+        - Messages
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              blogs:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: Blog ID
+                    title:
+                      type: string
+                      description: Blog title
+                    image:
+                      type: string
+                      description: Blog image
+                    content:
+                      type: string
+                      description: Blog content
+                    created_at:
+                      type: string
+                      description: message creation timestamp
+
+        401:
+          description: Not authorised to retrieve All messages
+
+  #Update and delete blog
+  /api/v1/blogs/{messageId}:
+    delete:
+      summary: Update an existing blog
+      tags:
+        - Messages
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: messageId
+          type: string
+          required: true
+          description: ID of the Message to be deleted
+        - in: body
+          name: Message
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: Sender username
+              image:
+                type: string
+                description: User email
+              content:
+                type: string
+                description: User message content
+      responses:
+        200:
+          schema:
+            type: object
+        401:
+          description: Not authorised to delete any message
