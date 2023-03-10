@@ -1,16 +1,16 @@
 import jwt from "jsonwebtoken";
 import User from "../model/user.js";
 
+
 const secret = "faustin";
 
 const authMiddleware = async (req, res, next) => {
-    const token = req.cookies.token;
+    const token = req.cookies.token || req.header('Authorization');
     if (!token) {
         return res.status(401).json({
             message: "You need to be logged in to perform this action",
         });
     }
-
     try {
         const decoded = jwt.verify(token, secret);
         const user = await User.findById(decoded.id);
