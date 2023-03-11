@@ -26,7 +26,7 @@ const loginController = async (req, res) => {
 
                 res.cookie("token", token, {
                     httpOnly: true,
-                    secure: false, // I must remember to set this to true in production
+                    secure: true, // I must remember to set this to true in production
                 });
 
                 return res.status(200).json({ message: "Logged in successfully", token: token });
