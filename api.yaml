@@ -225,18 +225,18 @@ paths:
         - application/json
       parameters:
         - in: body
-          name: blog
+          name: messages
           schema:
             type: object
             properties:
-              title:
+              Name:
                 type: string
                 required: true
                 description: Blog title
-              image:
+              email:
                 type: string
                 description: Blog image
-              content:
+              Message:
                 type: string
                 required: true
                 description: Blog content
@@ -259,7 +259,7 @@ paths:
           schema:
             type: object
             properties:
-              blogs:
+              messages:
                 type: array
                 items:
                   type: object
@@ -267,15 +267,15 @@ paths:
                     id:
                       type: string
                       description: Blog ID
-                    title:
+                    Name:
                       type: string
-                      description: Blog title
-                    image:
+                      description: sender username
+                    email:
                       type: string
-                      description: Blog image
-                    content:
+                      description: sender email
+                    Message:
                       type: string
-                      description: Blog content
+                      description: Sender message content
                     created_at:
                       type: string
                       description: message creation timestamp
@@ -283,7 +283,7 @@ paths:
         401:
           description: Not authorised to retrieve All messages
 
-  #Update and delete
+  #delete
   /api/v1/message/{id}:
     delete:
       summary: Delete a message
