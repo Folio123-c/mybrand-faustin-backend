@@ -1,72 +1,75 @@
-#name: Build, Test, and Deploy
-#
-#on:
-#  push:
-#    branches:
-#      - main
-#
-#jobs:
-#  build:
-#    runs-on: ubuntu-latest
-#    services:
-#      # Start a MongoDB service
-#      mongodb:
-#        image: mongo
-#        ports:
-#          - 27017/tcp
-#        options: >-
-#          --health-cmd "mongo --eval 'db.runCommand({ ping: 1 })'"
-#          --health-interval 10s
-#          --health-timeout 5s
-#          --health-retries 3
-#    steps:
-#      - name: Checkout Code
-#        uses: actions/checkout@v2
-#
-#      - name: Setup Node.js
-#        uses: actions/setup-node@v2
-#        with:
-#          node-version: 18.x
-#
-#      - name: Install Dependencies
-#        run: npm install
-#
-#  test:
-#    needs: build
-#
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout Code
-#        uses: actions/checkout@v2
-#
-#      - name: Setup Node.js
-#        uses: actions/setup-node@v2
-#        with:
-#          node-version: 18.x
-#
-#      - name: Install Dependencies
-#        run: npm install
-#
-#      - name: Run Tests
-#        run: npm test
-#
-#  deploy:
-#    needs: test
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout Code
-#        uses: actions/checkout@v2
-#
-#      - name: Setup Node.js
-#        uses: actions/setup-node@v2
-#        with:
-#          node-version: 18.x
-#
-#      - name: Install Dependencies
-#        run: npm install
-#
-#      - name: Deploy
-#        run: npm start
+name: Build, Test, and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      # Start a MongoDB service
+      mongodb:
+        image: mongo
+        ports:
+          - 27017/tcp
+        options: >-
+          --health-cmd "mongo --eval 'db.runCommand({ ping: 1 })'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 3
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18.x
+
+      - name: Install Dependencies
+        run: npm install
+      - name: Set Environment Variables
+        run: |
+          echo "MONGODB_URI=mongodb+srv://niyof97:mybrand123@cluster0.t5ivqjz.mongodb.net/mybrandtest?retryWrites=true" >> $GITHUB_ENV
+
+  test:
+    needs: build
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18.x
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Tests
+        run: npm test
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18.x
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Deploy
+        run: npm start
 ##name: My Workflow
 ##
 ##on: [push]
@@ -101,70 +104,70 @@
 ##          - name: Run tests
 ##            run: npm test
 
-name: Build, Test, and Deploy
-
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 18.x
-
-      - name: Install Dependencies
-        run: npm install
-
-  test:
-    needs: build
-
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 18.x
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Set Environment Variables
-        run: |
-          echo "MONGODB_URI=mongodb+srv://niyof97:mybrand123@cluster0.t5ivqjz.mongodb.net/mybrandtest?retryWrites=true" >> $GITHUB_ENV
-
-      - name: Run Tests
-        run: npm test
-
-  deploy:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 18.x
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Set Environment Variables
-        run: |
-          echo "MONGODB_URI=mongodb+srv://niyof97:mybrand123@cluster0.t5ivqjz.mongodb.net/mybrandtest?retryWrites=true" >> $GITHUB_ENV
-
-      - name: Deploy
-        run: npm start
-
+#name: Build, Test, and Deploy
+#
+#on:
+#  push:
+#    branches:
+#      - main
+#
+#jobs:
+#  build:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout Code
+#        uses: actions/checkout@v2
+#
+#      - name: Setup Node.js
+#        uses: actions/setup-node@v2
+#        with:
+#          node-version: 18.x
+#
+#      - name: Install Dependencies
+#        run: npm install
+#
+#  test:
+#    needs: build
+#
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout Code
+#        uses: actions/checkout@v2
+#
+#      - name: Setup Node.js
+#        uses: actions/setup-node@v2
+#        with:
+#          node-version: 18.x
+#
+#      - name: Install Dependencies
+#        run: npm install
+#
+#      - name: Set Environment Variables
+#        run: |
+#          echo "MONGODB_URI=mongodb+srv://niyof97:mybrand123@cluster0.t5ivqjz.mongodb.net/mybrandtest?retryWrites=true" >> $GITHUB_ENV
+#
+#      - name: Run Tests
+#        run: npm test
+#
+#  deploy:
+#    needs: test
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout Code
+#        uses: actions/checkout@v2
+#
+#      - name: Setup Node.js
+#        uses: actions/setup-node@v2
+#        with:
+#          node-version: 18.x
+#
+#      - name: Install Dependencies
+#        run: npm install
+#
+#      - name: Set Environment Variables
+#        run: |
+#          echo "MONGODB_URI=mongodb+srv://niyof97:mybrand123@cluster0.t5ivqjz.mongodb.net/mybrandtest?retryWrites=true" >> $GITHUB_ENV
+#
+#      - name: Deploy
+#        run: npm start
+#
