@@ -8,17 +8,17 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    services:
-      # Start a MongoDB service
-      mongodb:
-        image: mongo
-        ports:
-          - 27017/tcp
-        options: >-
-          --health-cmd "mongo --eval 'db.runCommand({ ping: 1 })'"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 3
+#    services:
+#      # Start a MongoDB service
+#      mongodb:
+#        image: mongo
+#        ports:
+#          - 27017/tcp
+#        options: >-
+#          --health-cmd "mongo --eval 'db.runCommand({ ping: 1 })'"
+#          --health-interval 10s
+#          --health-timeout 5s
+#          --health-retries 3
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
